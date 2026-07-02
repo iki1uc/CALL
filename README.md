@@ -55,3 +55,33 @@ Beide Modi steuern die Geschwindigkeit der Kreise.
 
 ## Dateien
 
+## index.html
+
+Die Oberfläche besteht aus vier Canvas-Elementen:
+
+- jeder Quadrant = eigener Canvas  
+- jeder Canvas = eigener Kreis  
+- alle Kreise laufen synchron  
+
+## gpu.js
+
+gpu.js steuert:
+
+- Quadranten  
+- Kreise  
+- Takte  
+- Abbau  
+- Energie  
+- Modi (3all/12all)  
+- Systemwerte  
+
+## QUAD-Module
+
+Jedes QUAD-Modul berechnet seinen eigenen Zustand:
+
+- **front.js** – Darstellung  
+- **depth.js** – Tiefe  
+- **flow.js** – Bewegung  
+- **core.js** – Logik  
+
+
