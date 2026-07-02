@@ -1,6 +1,5 @@
-Name: PRM
-Code: PRM_CORE
-Endung: .js / .md
-Ordner: /PRM
-Lage zum Root: /PRM/index.html
-
+Name: GPU
+Code: GPU_4Q
+Endung: .js / .html / .md
+Ordner: /GPU
+Lage zum Root: /GPU/index.html
