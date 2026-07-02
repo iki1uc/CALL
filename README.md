@@ -1,79 +1,57 @@
-# GPU — Aquarium-Modul (4-Block-Welt)
+# GPU — 4-Quadranten-Renderer
 
-GPU ist ein RESPO-Modul, das die Welt in vier Quadranten darstellt.
-Jeder Quadrant besitzt einen eigenen Zustand, eigenen Takt und eigenen Kreis.
+GPU ist ein technisches Modul, das vier parallele Zustände rendert.
+Jeder Zustand läuft in einem eigenen Quadranten und besitzt einen eigenen Takt.
 
-## 4-Block-Aquarium
+## Quadranten
 
-Die GPU-Welt ist in vier Bereiche geteilt:
+GPU nutzt vier Bereiche:
 
-1. **QUAD-FRONT** – Sichtfenster / Frontlayer  
-2. **QUAD-DEPTH** – Tiefe / Zustand / Innenraum  
-3. **QUAD-FLOW** – Bewegung / Fluss / Dynamik  
-4. **QUAD-CORE** – Rechenzentrum / Kernprozesse  
+1. **FRONT** – Sichtfenster / Darstellung
+2. **DEPTH** – Tiefe / Innenzustand
+3. **FLOW** – Bewegung / Fluss
+4. **CORE** – Rechenzentrum / Logik
 
-Alle vier Quadranten laufen synchron, aber jeder besitzt seinen eigenen Zustand.
+Jeder Quadrant wird separat berechnet und separat gerendert.
 
 ## Sanduhr-Kreise
 
-Jeder Quadrant enthält einen Sanduhr-Kreis:
+Jeder Quadrant enthält einen Kreis mit:
 
-- 0–360° Drehung (Uhrprinzip)  
-- Füllstand sinkt (Sanduhrprinzip)  
-- Kreisbreite = Füllstand  
-- Kreishelligkeit = Energie  
+- 0–360° Rotation  
+- Füllstand (Abbau)  
+- Energie (Helligkeit)  
+- eigenem Takt  
 
-Damit entstehen vier parallele Zeiträume.
+Die Kreise laufen synchron, aber jeder besitzt seinen eigenen Zustand.
 
-## CPU / GPU / RAM
+## Ressourcen
 
-GPU nutzt geschätzte Ressourcen:
+GPU nutzt geschätzte Systemwerte:
 
 - **GPU-RAM:** 2048 MB  
 - **GPU-Speed:** 8 Gbps  
 - **CPU-Kerne:** 2  
-- **CPU_CORE_A:** Step-Control  
-- **CPU_CORE_B:** Flow-Control  
+- **CORE_A:** Step-Control  
+- **CORE_B:** Flow-Control  
 
-## GATE / EICH / GEN / KETTE / CLUSTER
+## Systemwerte
 
-GPU arbeitet unter globalen Systemwerten:
+GPU übernimmt globale Werte:
 
-- **GATE-ID:** GATE_92  
-- **EICH:** EICH_12 (0.888)  
-- **GEN:** GEN_CORE  
+- **GATE:** GATE_92  
+- **EICH:** EICH_12  
 - **KETTE:** KETTE_81  
 - **CLUSTER:** 81~81(1)  
 
-Diese Werte werden vom Modul *aWAKE* gesetzt.
+## Modi
 
-## 3all / 12all
-
-GPU unterstützt beide Modi:
+GPU unterstützt zwei Modi:
 
 - **3all** – Dreifach-Takt  
 - **12all** – Zwölffach-Takt  
 
-Beide Modi steuern die Geschwindigkeit der Sanduhr-Kreise.
+Beide Modi steuern die Geschwindigkeit der Kreise.
 
-## RESPO-Definition
-
-GPU ist ein RESPO:
-
-- wird von **aWAKE** geweckt  
-- nutzt **SUB**-Daten  
-- erzeugt **TMP**-Spuren  
-- arbeitet in vier Quadranten  
-- liefert visuelle und technische Zustände  
-
-## index.html
-
-Die visuelle Front des GPU-RESPO besteht aus vier Canvas-Elementen:
-
-- jeder Quadrant = eigener Canvas  
-- jeder Canvas = eigener Sanduhr-Kreis  
-- alle Kreise laufen synchron  
-- alle Kreise folgen dem Sanduhr-Prinzip  
-
-Dies bildet das Aquarium-Modul der GPU.
+## Dateien
 
