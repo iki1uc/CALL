@@ -2,27 +2,49 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>GPU Console</title>
+  <title>GPU ONLINE</title>
+  <style>
+    body {
+      background: #111;
+      color: #0ff;
+      font-family: monospace;
+      padding: 40px;
+      font-size: 22px;
+    }
+    .gpu {
+      border: 2px solid #0ff;
+      padding: 20px;
+      width: 480px;
+    }
+    .stat {
+      margin-top: 20px;
+      color: #0f0;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>GPU Console</h1>
-<input id="txt" placeholder="GPU Input">
-<button id="run">RUN GPU</button>
-<pre id="out"></pre>
+<div class="gpu">
+  <div>GPU ONLINE</div>
+  <div>System: GPU-4Q</div>
+  <div>Status: aktiv</div>
 
-<script type="module">
-  import { fromGPU } from "./gpu.js";
+  <!-- 81-Würfel -->
+  <div class="stat">Cube gesamt: 81</div>
+  <div class="stat">Cube aktiv: 9</div>
+  <div class="stat">Cube frei: 72</div>
 
-  document.getElementById("run").addEventListener("click", async () => {
-    const msg = document.getElementById("txt").value || "GPU TEST";
-    const out = await fromGPU({ msg });
-    document.getElementById("out").textContent =
-      JSON.stringify(out, null, 2);
-  });
-</script>
+  <!-- Quadranten -->
+  <div class="stat">Quadranten: 4</div>
+  <div class="stat">Q1: FRONT (Render)</div>
+  <div class="stat">Q2: FLOW (Motion)</div>
+  <div class="stat">Q3: DEPTH (State)</div>
+  <div class="stat">Q4: CORE (Compute)</div>
+
+  <!-- EVO -->
+  <div class="stat">EVO: bereit</div>
+</div>
 
 </body>
 </html>
-
