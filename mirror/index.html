@@ -1,6 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GPU Mirror</title>
+</head>
 
-Name: Web-GPU-Mirror
-Code: GPU_MIR_G
-Endung: .js
-Ordner: /GPU/mirror
-Lage zum Root: /GPU/mirror/index.html
+<body>
+
+<h1>GPU Mirror Console</h1>
+<input id="txt" placeholder="Mirror Input">
+<button id="run">RUN</button>
+<pre id="out"></pre>
+
+<script type="module">
+  import { fromGPU } from "../gpu.js";
+
+  document.getElementById("run").addEventListener("click", async () => {
+    const msg = document.getElementById("txt").value || "MIRROR TEST";
+    const out = await fromGPU({ msg });
+    document.getElementById("out").textContent =
+      JSON.stringify(out, null, 2);
+  });
+</script>
+
+</body>
+</html>
