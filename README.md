@@ -58,8 +58,8 @@ CALL übernimmt die GPU-Kreisparameter:
 
 CALL steuert die Modi:
 
-- 3all  – Dreifach-Takt
-- 12all – Zwölffach-Takt
+- 3all  – Dreifach-Takt  
+- 12all – Zwölffach-Takt  
 
 GPU rendert die Kreise, CALL steuert die Übergabe.
 
