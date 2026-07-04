@@ -1,49 +1,35 @@
-# CALL — GPU-Interface-Operator (RESPO)
+# CALL — GPU-Operator für QUAD-Rendering
 
-CALL ist ein RESPO-Modul, das alle GPU-Funktionen übernimmt und
-als Interface-Operator zwischen GPU und dem NC-System arbeitet.
-CALL bleibt neutral, erzeugt keine eigenen Werte und trifft keine
-eigenen Entscheidungen.
+CALL ist ein RESPO-Operator-Modul, das alle GPU-Funktionen übernimmt
+und als neutraler Vermittler zwischen GPU und dem NC-System arbeitet.
+CALL bleibt vollständig neutral, erzeugt keine eigenen Werte und trifft
+keine eigenen Entscheidungen.
 
-CALL übernimmt die GPU-Quadranten vollständig:
+CALL übernimmt die vier GPU-Quadranten vollständig:
 
 - FRONT  – Darstellung
 - DEPTH  – Innenzustand
-- FLOW   – Bewegung
-- CORE   – Logik
+- FLOW   – Bewegung / Fluss
+- CORE   – Logik / Rechenzentrum
 
-CALL nutzt diese Quadranten als Eingabe und reicht die berechneten
-Zustände direkt an GPU weiter. GPU bleibt das technische Render-Modul,
-CALL wird zum neutralen Operator.
+CALL nutzt diese Quadranten als Eingabe, klassifiziert sie und reicht
+die berechneten Zustände direkt an GPU weiter. GPU bleibt das technische
+Render-Modul, CALL wird zum neutralen Operator.
 
-## CALL als Master
+## CALL-Funktion
 
-CALL kann als Master arbeiten:
+CALL führt vier Aufgaben aus:
 
-- CALL empfängt alle GPU-Zustände
-- CALL klassifiziert die Quadranten
-- CALL steuert Modi (3all / 12all)
-- CALL reicht die finalen Werte an GPU weiter
-- GPU rendert die Ergebnisse
+1. GPU-Zustände entgegennehmen  
+2. Quadranten klassifizieren  
+3. Modi (3all / 12all) steuern  
+4. Zustände an GPU weiterreichen  
 
 CALL überschreibt keine GPU-Werte.
 CALL führt keine eigenen Berechnungen aus.
+CALL bleibt vollständig neutral.
 
-## CALL als Slave
-
-CALL kann als Slave arbeiten:
-
-- GPU berechnet Quadranten
-- GPU sendet Zustände an CALL
-- CALL legt die Zustände in Pipeline 3 oder Pipeline 6 ab
-- CALL bleibt neutral und passiv
-
-CALL entscheidet nicht.
-CALL verändert keine GPU-Daten.
-
-## Quadranten-Übernahme
-
-CALL übernimmt die vier GPU-Quadranten:
+## Quadranten-Interface
 
 ### FRONT
 Darstellung / Sichtfenster  
@@ -61,26 +47,67 @@ CALL verteilt FLOW-Daten neutral in die passende Pipeline.
 Logik / Rechenzentrum  
 CALL nimmt CORE-Impulse auf und reicht sie unverändert weiter.
 
-## Modi
+## Sanduhr-Kreise
 
-CALL unterstützt beide GPU-Modi:
+CALL übernimmt die GPU-Kreisparameter:
+
+- Rotation (0–360°)
+- Füllstand (Abbau)
+- Energie (Helligkeit)
+- Takt (Quadrant-spezifisch)
+
+CALL steuert die Modi:
 
 - 3all  – Dreifach-Takt
 - 12all – Zwölffach-Takt
 
-CALL steuert die Modi, GPU rendert sie.
+GPU rendert die Kreise, CALL steuert die Übergabe.
+
+## Ressourcen
+
+CALL übernimmt GPU-Ressourcen:
+
+- GPU-RAM: 2048 MB  
+- GPU-Speed: 8 Gbps  
+- CPU-Kerne: 2  
+- CORE_A: Step-Control  
+- CORE_B: Flow-Control  
+
+CALL verändert diese Werte nicht.
+
+## Systemwerte
+
+CALL übernimmt globale GPU-Werte:
+
+- GATE_92  
+- EICH_12  
+- KETTE_81  
+- CLUSTER 81~81(1)
+
+CALL reicht diese Werte neutral weiter.
+
+## QUAD-Module
+
+CALL arbeitet direkt mit den QUAD-Modulen:
+
+- front.js – Darstellung  
+- depth.js – Tiefe  
+- flow.js  – Bewegung  
+- core.js  – Logik  
+
+CALL empfängt die QUAD-Zustände und reicht sie an GPU weiter.
 
 ## Sicherheit
 
 CALL ist sicher, weil:
 
-- keine eigenen Werte erzeugt werden
-- keine eigenen Entscheidungen getroffen werden
-- GPU-Daten nicht verändert werden
-- keine Rückführung möglich ist
-- keine Rekonstruktion möglich ist
+- keine eigenen Werte erzeugt werden  
+- keine eigenen Entscheidungen getroffen werden  
+- GPU-Daten nicht verändert werden  
+- keine Rückführung möglich ist  
+- keine Rekonstruktion möglich ist  
 
-CALL bleibt neutral, stabil und regelkonform.
+CALL bleibt neutral und stabil.
 
 ## Ergebnis
 
@@ -90,10 +117,10 @@ CALL wird zum Interface-Operator zwischen GPU und dem NC-System.
 
 CALL ist kompatibel mit:
 
-- Pipeline 3
-- Pipeline 6
-- MXU
-- RESPO
-- QUAD-Modulen
+- Pipeline 3  
+- Pipeline 6  
+- MXU  
+- RESPO  
+- QUAD-Modulen  
 
 CALL bleibt neutral und zukunftsfähig.
