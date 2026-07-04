@@ -1,86 +1,99 @@
-GPU — 4-Quadranten-Renderer
+# CALL — GPU-Interface-Operator (RESPO)
 
-GPU ist ein technisches Modul, das vier parallele Zustände rendert.
-Jeder Zustand läuft in einem eigenen Quadranten und besitzt einen eigenen Takt.
+CALL ist ein RESPO-Modul, das alle GPU-Funktionen übernimmt und
+als Interface-Operator zwischen GPU und dem NC-System arbeitet.
+CALL bleibt neutral, erzeugt keine eigenen Werte und trifft keine
+eigenen Entscheidungen.
 
-Quadranten
-----------
-GPU nutzt vier Bereiche:
+CALL übernimmt die GPU-Quadranten vollständig:
 
-1. FRONT  – Sichtfenster / Darstellung
-2. DEPTH  – Tiefe / Innenzustand
-3. FLOW   – Bewegung / Fluss
-4. CORE   – Rechenzentrum / Logik
+- FRONT  – Darstellung
+- DEPTH  – Innenzustand
+- FLOW   – Bewegung
+- CORE   – Logik
 
-Jeder Quadrant wird separat berechnet und separat gerendert.
+CALL nutzt diese Quadranten als Eingabe und reicht die berechneten
+Zustände direkt an GPU weiter. GPU bleibt das technische Render-Modul,
+CALL wird zum neutralen Operator.
 
-Sanduhr-Kreise
---------------
-Jeder Quadrant enthält einen Kreis mit:
+## CALL als Master
 
-- 0–360° Rotation
-- Füllstand (Abbau)
-- Energie (Helligkeit)
-- eigenem Takt
+CALL kann als Master arbeiten:
 
-Die Kreise laufen synchron, aber jeder besitzt seinen eigenen Zustand.
+- CALL empfängt alle GPU-Zustände
+- CALL klassifiziert die Quadranten
+- CALL steuert Modi (3all / 12all)
+- CALL reicht die finalen Werte an GPU weiter
+- GPU rendert die Ergebnisse
 
-Ressourcen
-----------
-GPU nutzt geschätzte Systemwerte:
+CALL überschreibt keine GPU-Werte.
+CALL führt keine eigenen Berechnungen aus.
 
-- GPU-RAM: 2048 MB
-- GPU-Speed: 8 Gbps
-- CPU-Kerne: 2
-- CORE_A: Step-Control
-- CORE_B: Flow-Control
+## CALL als Slave
 
-Systemwerte
------------
-GPU übernimmt globale Werte:
+CALL kann als Slave arbeiten:
 
-- GATE: GATE_92
-- EICH: EICH_12
-- KETTE: KETTE_81
-- CLUSTER: 81~81(1)
+- GPU berechnet Quadranten
+- GPU sendet Zustände an CALL
+- CALL legt die Zustände in Pipeline 3 oder Pipeline 6 ab
+- CALL bleibt neutral und passiv
 
-Modi
-----
-GPU unterstützt zwei Modi:
+CALL entscheidet nicht.
+CALL verändert keine GPU-Daten.
+
+## Quadranten-Übernahme
+
+CALL übernimmt die vier GPU-Quadranten:
+
+### FRONT
+Darstellung / Sichtfenster  
+CALL empfängt FRONT-Frames und leitet sie an GPU weiter.
+
+### DEPTH
+Tiefe / Innenzustand  
+CALL puffert DEPTH-Zustände und stabilisiert Übergänge.
+
+### FLOW
+Bewegung / Fluss  
+CALL verteilt FLOW-Daten neutral in die passende Pipeline.
+
+### CORE
+Logik / Rechenzentrum  
+CALL nimmt CORE-Impulse auf und reicht sie unverändert weiter.
+
+## Modi
+
+CALL unterstützt beide GPU-Modi:
 
 - 3all  – Dreifach-Takt
 - 12all – Zwölffach-Takt
 
-Beide Modi steuern die Geschwindigkeit der Kreise.
+CALL steuert die Modi, GPU rendert sie.
 
-Dateien
--------
+## Sicherheit
 
-index.html
-----------
-Die Oberfläche besteht aus vier Canvas-Elementen:
+CALL ist sicher, weil:
 
-- jeder Quadrant = eigener Canvas
-- jeder Canvas = eigener Kreis
-- alle Kreise laufen synchron
+- keine eigenen Werte erzeugt werden
+- keine eigenen Entscheidungen getroffen werden
+- GPU-Daten nicht verändert werden
+- keine Rückführung möglich ist
+- keine Rekonstruktion möglich ist
 
-gpu.js
-------
-gpu.js steuert:
+CALL bleibt neutral, stabil und regelkonform.
 
-- Quadranten
-- Kreise
-- Takte
-- Abbau
-- Energie
-- Modi (3all/12all)
-- Systemwerte
+## Ergebnis
 
-QUAD-Module
------------
-Jedes QUAD-Modul berechnet seinen eigenen Zustand:
+CALL übernimmt GPU vollständig.
+GPU wird neu aufgestellt und bleibt technisches QUAD-Modul.
+CALL wird zum Interface-Operator zwischen GPU und dem NC-System.
 
-- front.js – Darstellung
-- depth.js – Tiefe
-- flow.js  – Bewegung
-- core.js  – Logik
+CALL ist kompatibel mit:
+
+- Pipeline 3
+- Pipeline 6
+- MXU
+- RESPO
+- QUAD-Modulen
+
+CALL bleibt neutral und zukunftsfähig.
